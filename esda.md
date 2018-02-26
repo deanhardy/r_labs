@@ -113,7 +113,7 @@ m16 %>%
   geom_point()
 ```
 
-![](esda-r-lab_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
 Your graph should look similar to the one above. Take a look at the plot and identify where Maryland was in 2016 compared to other states. Is median rent higher or lower than Virginia? If Maryland isn't your home state, how does the state where you went to high school compare to Maryland rent prices?
 
@@ -147,7 +147,7 @@ md %>%
        x = "ACS estimate (bars represent margin of error)")
 ```
 
-![](esda-r-lab_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
 
 #### 3.3. Explore other variables
 There are thousands of variables collected with census data. What if you want to download and plot other variables? To explore the data, you need to download the variables as a table and filter through them until you find the variable code. Enter the following code to create a searchable table of ACS Census variables and then Decennial Census variables.
@@ -220,7 +220,7 @@ As part of the ```tmap``` package, the function ```qtm()``` is included. This st
 qtm(md_spatial)
 ```
 
-![](esda-r-lab_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 The above map is a map of Maryland counties, but doesn't actually plot the data on median household income. Let's add some arguments to the ```qtm()``` function that will include those data in our map.
 
@@ -228,7 +228,7 @@ The above map is a map of Maryland counties, but doesn't actually plot the data 
 qtm(md_spatial, fill = "estimate")
 ```
 
-![](esda-r-lab_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 The resulting map is a choropleth map with five categories for median household income. 
 
@@ -283,7 +283,7 @@ head(World@data)
 ```
 
 Now that you have the world data and have viewed its attribute dataframe, use the ```qtm()``` function to make a world map with the variable ```income_grp```. It should look like the one below. If you can't remember how to do that, look at the beginning of this section.
-![](esda-r-lab_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
 
 #### 4.4. Best Practices for Cartography
 Good mapmaking practices requrires that all maps have at minimum four peripheral features: (1) title, (2) legend, (3) north arrow, and (4) scale bar. Those haven't been included on the maps above, but they are easy to add with ```tmap``` functions. You can also move them around on the map with the ```position``` argument.
@@ -298,7 +298,7 @@ tm_shape(World) +
   tm_layout(main.title = "Country Life Expectancy", main.title.position = "center")
 ```
 
-![](esda-r-lab_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 You'll notice that in the above code, I didn't use the ```qtm()``` function, but instead used ```tm_shape``` + ```tm_polygons```. The ```tmap``` package has several functions that are specific to spatial data in the format of polygons, points, lines, rasters, etc. This syntax also allows for stacking of layers of different formats, or layering spatial data. For example, we can layer GDP (Gross Domestic Product) per capita over our map of life expectancy.
 
@@ -313,7 +313,7 @@ tm_shape(World) +
   tm_layout(main.title = "Country Life Expectancy & GDP Per Capita", main.title.position = "center")
 ```
 
-![](esda-r-lab_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 ##### 4.4.1. Map Projections
 Using appropriate map projections are critical to good map making skills. Considerations must be made about inevitable distortions that will occur when projecting a sphere (the Earth) into 2-D space. Major considerations are shape, size, and scale. The default projection used by ```tmap``` for global projections is called Eckert IV. This is an equal-area projection that is psuedo-cylindrical. The function below is from the package ```tmaptools```.

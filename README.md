@@ -1,4 +1,5 @@
 # r_labs
 Lab exercises using R
 
-This is a line from RStudio
+ESDA Lab: http://bit.ly/2owFAkD
+

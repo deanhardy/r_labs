@@ -2,7 +2,7 @@
 title: "Using R for Exploratory Spatial Data Analysis (ESDA)"
 subtitle: 'ENST 382-01 GIS Applications: An Introduction to Spatial Thinking'
 author: Dean Hardy
-date: "2018-02-25"
+date: "2018-03-07"
 output: 
       html_document:
         keep_md: yes
@@ -69,7 +69,7 @@ For Organization Name, put "St. Mary's College of Maryland" and for your email e
 After you receive the email containing your Census API Key insert it in the code below between the quotes and run the code to install it in your R environment.
 
 ```r
-census_api_key("your_census_api_key_goes_here", install = TRUE)
+census_api_key("your_census_api_key_goes_here")
 ```
 
 Note that copying and pasting the code snippets is fine and can be very helpful, but it's a better idea for learning to type out the code manually each time. When you've really got the hang of it, then copying and pasting can save a lot of time! Try not to copy and paste the code for the remaining lab exercises.

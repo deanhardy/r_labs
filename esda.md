@@ -2,13 +2,18 @@
 title: "Using R for Exploratory Spatial Data Analysis (ESDA)"
 subtitle: 'ENST 382-01 GIS Applications: An Introduction to Spatial Thinking'
 author: Dean Hardy
-date: "2018-03-07"
+date: "2020-09-07"
 output: 
       html_document:
         keep_md: yes
 ---
 
 
+
+
+```r
+<iframe width="560" height="315" src="https://youtu.be/3vijLre760w" frameborder="0" allowfullscreen></iframe>
+```
 
 In the age of "Big Data", ESDA is a commonly used approach for exploring large datasets and looking for patterns before developing and testing hypotheses or ideas about the relationships of social and environmental variables.[^1]
 
@@ -97,12 +102,12 @@ head(m16)
 ## # A tibble: 6 x 5
 ##   GEOID NAME       variable   estimate   moe
 ##   <chr> <chr>      <chr>         <dbl> <dbl>
-## 1 01    Alabama    B25064_001      728  4.00
-## 2 02    Alaska     B25064_001     1173 11.0 
-## 3 04    Arizona    B25064_001      937  4.00
-## 4 05    Arkansas   B25064_001      689  4.00
-## 5 06    California B25064_001     1297  2.00
-## 6 08    Colorado   B25064_001     1057  4.00
+## 1 01    Alabama    B25064_001      728     4
+## 2 02    Alaska     B25064_001     1173    11
+## 3 04    Arizona    B25064_001      937     4
+## 4 05    Arkansas   B25064_001      689     4
+## 5 06    California B25064_001     1297     2
+## 6 08    Colorado   B25064_001     1057     4
 ```
 
 A very population functionfor making plots (i.e., graphs) of data is called ```ggplot()```, which comes with the package ```ggplot2```. To plot the data on median gross rent in a graph, type in the code below.
@@ -113,7 +118,7 @@ m16 %>%
   geom_point()
 ```
 
-![](esda_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-7-1.png)<!-- -->
 
 Your graph should look similar to the one above. Take a look at the plot and identify where Maryland was in 2016 compared to other states. Is median rent higher or lower than Virginia? If Maryland isn't your home state, how does the state where you went to high school compare to Maryland rent prices?
 
@@ -147,7 +152,7 @@ md %>%
        x = "ACS estimate (bars represent margin of error)")
 ```
 
-![](esda_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-10-1.png)<!-- -->
 
 #### 3.3. Explore other variables
 There are thousands of variables collected with census data. What if you want to download and plot other variables? To explore the data, you need to download the variables as a table and filter through them until you find the variable code. Enter the following code to create a searchable table of ACS Census variables and then Decennial Census variables.
@@ -194,23 +199,22 @@ head(md_spatial)
 ## Simple feature collection with 6 features and 5 fields
 ## geometry type:  MULTIPOLYGON
 ## dimension:      XY
-## bbox:           xmin: -79.48765 ymin: 38.31653 xmax: -75.70736 ymax: 39.72288
-## epsg (SRID):    4269
-## proj4string:    +proj=longlat +datum=NAD83 +no_defs
-##   GEOID                          NAME  variable estimate  moe
-## 1 24003 Anne Arundel County, Maryland medincome    91918 1140
-## 2 24009      Calvert County, Maryland medincome    96808 2924
-## 3 24011     Caroline County, Maryland medincome    50830 1263
-## 4 24023      Garrett County, Maryland medincome    46277 1567
-## 5 24025      Harford County, Maryland medincome    81052 1488
-## 6 24027       Howard County, Maryland medincome   113800 1574
+## bbox:           xmin: -79.06756 ymin: 38.53537 xmax: -75.70736 ymax: 39.72304
+## geographic CRS: NAD83
+##   GEOID                             NAME  variable estimate  moe
+## 1 24003    Anne Arundel County, Maryland medincome    97810 1299
+## 2 24011        Caroline County, Maryland medincome    54956 2419
+## 3 24033 Prince George's County, Maryland medincome    81969  837
+## 4 24043      Washington County, Maryland medincome    59719 1519
+## 5 24001        Allegany County, Maryland medincome    44065 1148
+## 6 24005       Baltimore County, Maryland medincome    74127  922
 ##                         geometry
 ## 1 MULTIPOLYGON (((-76.84036 3...
-## 2 MULTIPOLYGON (((-76.70121 3...
-## 3 MULTIPOLYGON (((-76.01505 3...
-## 4 MULTIPOLYGON (((-79.48765 3...
-## 5 MULTIPOLYGON (((-76.0921 39...
-## 6 MULTIPOLYGON (((-77.18711 3...
+## 2 MULTIPOLYGON (((-76.01505 3...
+## 3 MULTIPOLYGON (((-77.07995 3...
+## 4 MULTIPOLYGON (((-78.36346 3...
+## 5 MULTIPOLYGON (((-79.06756 3...
+## 6 MULTIPOLYGON (((-76.3257 39...
 ```
 
 #### 4.2. Make a "Quick Thematic Map"
@@ -220,7 +224,7 @@ As part of the ```tmap``` package, the function ```qtm()``` is included. This st
 qtm(md_spatial)
 ```
 
-![](esda_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
 
 The above map is a map of Maryland counties, but doesn't actually plot the data on median household income. Let's add some arguments to the ```qtm()``` function that will include those data in our map.
 
@@ -228,7 +232,7 @@ The above map is a map of Maryland counties, but doesn't actually plot the data 
 qtm(md_spatial, fill = "estimate")
 ```
 
-![](esda_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-14-1.png)<!-- -->
 
 The resulting map is a choropleth map with five categories for median household income. 
 
@@ -248,42 +252,11 @@ The SPDF format is similar to the ```sf``` dataframe you downloaded above as ```
 
 ```r
 ## Now view just the attribute data
-head(World@data)
-```
-
-```
-##    iso_a3                 name           sovereignt     continent
-## 2     AFG          Afghanistan          Afghanistan          Asia
-## 3     AGO               Angola               Angola        Africa
-## 5     ALB              Albania              Albania        Europe
-## 8     ARE United Arab Emirates United Arab Emirates          Asia
-## 9     ARG            Argentina            Argentina South America
-## 10    ARM              Armenia              Armenia          Asia
-##          subregion    area  pop_est pop_est_dens gdp_md_est gdp_cap_est
-## 2    Southern Asia  652860 28400000     43.50090      22270    784.1549
-## 3    Middle Africa 1246700 12799293     10.26654     110300   8617.6635
-## 5  Southern Europe   27400  3639453    132.82675      21810   5992.6588
-## 8     Western Asia   83600  4798491     57.39822     184300  38407.9078
-## 9    South America 2736690 40913584     14.95003     573900  14027.1261
-## 10    Western Asia   28470  2967004    104.21510      18770   6326.2469
-##                      economy              income_grp life_exp well_being
-## 2  7. Least developed region           5. Low income     48.7   4.758381
-## 3  7. Least developed region  3. Upper middle income     51.1   4.206092
-## 5       6. Developing region  4. Lower middle income     76.9   5.268937
-## 8       6. Developing region 2. High income: nonOECD     76.5   7.196803
-## 9    5. Emerging region: G20  3. Upper middle income     75.9   6.441067
-## 10      6. Developing region  4. Lower middle income     74.2   4.367811
-##         HPI
-## 2  36.75366
-## 3  33.20143
-## 5  54.05118
-## 8  31.77827
-## 9  54.05504
-## 10 46.00319
+## head(World@data)
 ```
 
 Now that you have the world data and have viewed its attribute dataframe, use the ```qtm()``` function to make a world map with the variable ```income_grp```. It should look like the one below. If you can't remember how to do that, look at the beginning of this section.
-![](esda_files/figure-html/unnamed-chunk-16-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
 
 #### 4.4. Best Practices for Cartography
 Good mapmaking practices requrires that all maps have at minimum four peripheral features: (1) title, (2) legend, (3) north arrow, and (4) scale bar. Those haven't been included on the maps above, but they are easy to add with ```tmap``` functions. You can also move them around on the map with the ```position``` argument.
@@ -298,7 +271,7 @@ tm_shape(World) +
   tm_layout(main.title = "Country Life Expectancy", main.title.position = "center")
 ```
 
-![](esda_files/figure-html/unnamed-chunk-17-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
 
 You'll notice that in the above code, I didn't use the ```qtm()``` function, but instead used ```tm_shape``` + ```tm_polygons```. The ```tmap``` package has several functions that are specific to spatial data in the format of polygons, points, lines, rasters, etc. This syntax also allows for stacking of layers of different formats, or layering spatial data. For example, we can layer GDP (Gross Domestic Product) per capita over our map of life expectancy.
 
@@ -313,7 +286,7 @@ tm_shape(World) +
   tm_layout(main.title = "Country Life Expectancy & GDP Per Capita", main.title.position = "center")
 ```
 
-![](esda_files/figure-html/unnamed-chunk-18-1.png)<!-- -->
+![](esda_files/figure-html/unnamed-chunk-19-1.png)<!-- -->
 
 ##### 4.4.1. Map Projections
 Using appropriate map projections are critical to good map making skills. Considerations must be made about inevitable distortions that will occur when projecting a sphere (the Earth) into 2-D space. Major considerations are shape, size, and scale. The default projection used by ```tmap``` for global projections is called Eckert IV. This is an equal-area projection that is psuedo-cylindrical. The function below is from the package ```tmaptools```.

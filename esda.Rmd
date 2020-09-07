@@ -12,6 +12,10 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r, eval=FALSE}
+<iframe width="560" height="315" src="https://youtu.be/3vijLre760w" frameborder="0" allowfullscreen></iframe>
+```
+
 In the age of "Big Data", ESDA is a commonly used approach for exploring large datasets and looking for patterns before developing and testing hypotheses or ideas about the relationships of social and environmental variables.[^1]
 
 >
@@ -192,7 +196,7 @@ Try viewing the data with the ```View()``` function.
 The SPDF format is similar to the ```sf``` dataframe you downloaded above as ```md_spatial```, but comes with the data attached differently. It's more similar to the shapefile format, with different information held in different "subfiles". The **attribute** data for ```SPDF``` objects can be viewed using the ```head()``` function, but must be called specifically as in the code snippet below.
 ```{r}
 ## Now view just the attribute data
-head(World@data)
+## head(World@data)
 ```
 
 Now that you have the world data and have viewed its attribute dataframe, use the ```qtm()``` function to make a world map with the variable ```income_grp```. It should look like the one below. If you can't remember how to do that, look at the beginning of this section.
